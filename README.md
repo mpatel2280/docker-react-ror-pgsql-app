@@ -35,6 +35,12 @@ docker-compose up --build
 - POST `/signup` - Register a new user
 - POST `/login` - Login user
 
+### Users (Protected)
+- GET `/api/users` - Get all users
+- GET `/api/users/:id` - Get a specific user
+- PUT `/api/users/:id` - Update a user (own account only)
+- DELETE `/api/users/:id` - Delete a user (own account only)
+
 ### Items (Protected)
 - GET `/api/items` - Get all items
 - POST `/api/items` - Create a new item
