@@ -1,0 +1,17 @@
+# Backend (Rails)
+backend/tmp/
+backend/log/
+backend/.bundle/
+backend/vendor/bundle/
+
+# Frontend (React)
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# Database
+postgres_data/
+
+# Docker
+.env
+
