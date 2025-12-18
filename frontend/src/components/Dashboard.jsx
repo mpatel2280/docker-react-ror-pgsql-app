@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Dashboard.css'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 function Dashboard({ token, onLogout }) {
+  const navigate = useNavigate()
   const [items, setItems] = useState([])
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -112,7 +114,12 @@ function Dashboard({ token, onLogout }) {
     <div>
       <div className="navbar">
         <h1>My Items</h1>
-        <button onClick={onLogout}>Logout</button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button onClick={() => navigate('/profile')} style={{ backgroundColor: '#2196F3' }}>
+            Manage User
+          </button>
+          <button onClick={onLogout}>Logout</button>
+        </div>
       </div>
       
       <div className="container">

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # API routes
   namespace :api do
     resources :items
+    resources :users, only: [:index, :show, :update, :destroy]
   end
 
   # Defines the root path route ("/")

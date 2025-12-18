@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
+import UserProfile from './components/UserProfile'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -31,9 +32,13 @@ function App() {
           path="/signup" 
           element={token ? <Navigate to="/dashboard" /> : <Signup setToken={setToken} />} 
         />
-        <Route 
-          path="/dashboard" 
-          element={token ? <Dashboard token={token} onLogout={handleLogout} /> : <Navigate to="/login" />} 
+        <Route
+          path="/dashboard"
+          element={token ? <Dashboard token={token} onLogout={handleLogout} /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/profile"
+          element={token ? <UserProfile token={token} onLogout={handleLogout} /> : <Navigate to="/login" />}
         />
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
