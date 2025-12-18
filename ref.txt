@@ -1,0 +1,30 @@
+rails new backend --api --database=postgresql --skip-git
+cd backend && rails generate model User email:string password_digest:string
+cd backend && bundle install
+OR
+cd backend && bundle install --path vendor/bundle
+
+
+npm create vite@latest frontend -- --template react
+OR 
+mkdir frontend && cd frontend && npm init -y
+
+docker-compose up --build
+
+# already used port 5432 
+sudo lsof -i :5432 | grep LISTEN
+docker-compose logs db
+docker exec postgres_db ps aux | grep postgresql
+docker logs postgres_db --tail 50
+
+docker exec -it postgres_db bash
+root@c63c7a619528:/# psql -U appuser -d app_development
+app_development=# \dt
+                List of relations
+ Schema |         Name         | Type  |  Owner  
+--------+----------------------+-------+---------
+ public | ar_internal_metadata | table | appuser
+ public | items                | table | appuser
+ public | schema_migrations    | table | appuser
+ public | users                | table | appuser
+(4 rows)
