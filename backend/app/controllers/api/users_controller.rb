@@ -16,6 +16,24 @@ module Api
       render json: @user.as_json(only: [:id, :email, :is_admin, :created_at, :updated_at])
     end
 
+    # POST /api/users (signup / admin create)
+    def create
+      attrs = create_user_params.to_h.symbolize_keys
+
+      # prevent public signups from setting themselves admin
+      unless current_user&.admin?
+        attrs.delete(:is_admin)
+      end
+
+      @user = User.new(attrs)
+
+      if @user.save
+        render json: @user.as_json(only: [:id, :email, :is_admin, :created_at]), status: :created
+      else
+        render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
     # PUT/PATCH /api/users/:id
     def update
       # If not admin and updating password, require current password
@@ -60,6 +78,11 @@ module Api
       unless current_user.admin?
         render json: { errors: ['Admin access required'] }, status: :forbidden
       end
+    end
+
+    # permit is_admin for creation, but create above will strip it for non-admin creators
+    def create_user_params
+      params.require(:user).permit(:email, :password, :password_confirmation, :is_admin)
     end
 
     def user_params

@@ -32,3 +32,7 @@ app_development=# \dt
 
 cd backend && docker-compose run --rm backend rails generate migration AddIsAdminToUsers is_admin:boolean
 cd backend && docker-compose run --rm backend rails db:migrate
+
+# check table schema 
+\d users
+\d+ users 
