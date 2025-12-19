@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
-function Login({ setToken }) {
+function Login({ onLogin }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -24,7 +24,7 @@ function Login({ setToken }) {
       const data = await response.json()
 
       if (response.ok) {
-        setToken(data.token)
+        onLogin(data.token, data.user)
       } else {
         setError(data.errors ? data.errors.join(', ') : 'Login failed')
       }
